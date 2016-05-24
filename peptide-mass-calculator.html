@@ -18,6 +18,10 @@
             mass: {
                 type: Number,
                 value: 0.0
+            },
+            decimalPlaces: {
+                type: Number,
+                value: 6
             }
         },
         modificationPattern: /\[(\+\d+|\-\d+)\]/g,
@@ -60,6 +64,7 @@
                 this.mass+=this.aa[this.peptide[residue].toUpperCase()];
             }
             if(this.mass!=0.0) { this.mass+=this.H2O };
+            this.mass = this.mass.toFixed(this.decimalPlaces);
         }
     });
     </script>
