@@ -1,0 +1,18 @@
+{
+    "name": "peptide-mass-calculator",
+    "version": "0.0.0",
+    "description": "Peptide Mass Calculator",
+    "license": "MIT",
+    "main": "peptide-mass-calculator.html",
+    "keywords": [
+        "polymer",
+        "web-components"
+    ],
+    "ignore": [
+        "**/.*",
+        "bower_components"
+    ],
+    "dependencies": {
+        "polymer": "Polymer#^1.3.1"
+    }
+}
