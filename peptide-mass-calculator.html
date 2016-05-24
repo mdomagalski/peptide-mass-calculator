@@ -10,6 +10,10 @@
     Polymer({
         is: 'peptide-mass-calculator',
         properties: {
+            decimals: {
+                type: Number,
+                value: 6
+            },
             peptide: {
                 type: String,
                 value: "",
@@ -18,10 +22,6 @@
             mass: {
                 type: Number,
                 value: 0.0
-            },
-            decimals: {
-                type: Number,
-                value: 6
             }
         },
         modificationPattern: /\[(\+\d+|\-\d+)\]/g,
