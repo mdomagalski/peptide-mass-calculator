@@ -19,7 +19,7 @@
                 type: Number,
                 value: 0.0
             },
-            decimalPlaces: {
+            decimals: {
                 type: Number,
                 value: 6
             }
@@ -64,7 +64,7 @@
                 this.mass+=this.aa[this.peptide[residue].toUpperCase()];
             }
             if(this.mass!=0.0) { this.mass+=this.H2O };
-            this.mass = this.mass.toFixed(this.decimalPlaces);
+            this.mass = this.mass.toFixed(this.decimals);
         }
     });
     </script>
