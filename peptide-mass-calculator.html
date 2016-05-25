@@ -53,7 +53,7 @@
         _getPeptideMolecularMass: function(){
             this.mass = 0.0;
             if(!isNaN(parseFloat(this.peptide)) && isFinite(this.peptide)){
-                return parseFloat(this.peptide)
+                this.mass = parseFloat(this.peptide)
             }
             var modifications = this.peptide.match(this.modificationPattern);
             for(var mod in modifications){
