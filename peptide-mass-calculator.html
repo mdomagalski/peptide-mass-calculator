@@ -58,9 +58,9 @@
             var modifications = this.peptide.match(this.modificationPattern);
             for(var mod in modifications){
                 this.mass += new Number(modifications[mod].replace("[","").replace("]",""));
-                this.peptide = this.peptide.replace(modifications[mod], "");
+                var aaSequence = this.peptide.replace(modifications[mod], "");
             }
-            for(var residue in this.peptide){
+            for(var residue in aaSequence){
                 this.mass+=this.aa[this.peptide[residue].toUpperCase()];
             }
             if(this.mass!=0.0) { this.mass+=this.H2O };
