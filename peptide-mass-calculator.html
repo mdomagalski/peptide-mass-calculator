@@ -55,13 +55,14 @@
             if(!isNaN(parseFloat(this.peptide)) && isFinite(this.peptide)){
                 this.mass = parseFloat(this.peptide)
             }
+            var aaSequence = this.peptide;
             var modifications = this.peptide.match(this.modificationPattern);
             for(var mod in modifications){
                 this.mass += new Number(modifications[mod].replace("[","").replace("]",""));
-                var aaSequence = this.peptide.replace(modifications[mod], "");
+                aaSequence = aaSequence.replace(modifications[mod], "");
             }
             for(var residue in aaSequence){
-                this.mass+=this.aa[this.peptide[residue].toUpperCase()];
+                this.mass+=this.aa[aaSequence[residue].toUpperCase()];
             }
             if(this.mass!=0.0) { this.mass+=this.H2O };
             this.mass = this.mass.toFixed(this.decimals);
