@@ -1,4 +1,5 @@
 <link rel="import" href="../polymer/polymer.html">
+<script src="../fishtones-js/dist/fishtones-js-bundle-min.js"></script>
 
 <dom-module id="peptide-mass-calculator">
 
@@ -7,66 +8,31 @@
     </template>
 
     <script>
-    Polymer({
-        is: 'peptide-mass-calculator',
-        properties: {
-            decimals: {
-                type: Number,
-                value: 6
+        Polymer({
+            is: 'peptide-mass-calculator',
+            properties: {
+                decimals: {
+                    type: Number,
+                    value: 6
+                },
+                peptide: {
+                    type: String,
+                    value: "",
+                    observer: '_getPeptideMolecularMass'
+                },
+                mass: {
+                    type: Number,
+                    value: 0.0
+                }
             },
-            peptide: {
-                type: String,
-                value: "",
-                observer: '_getPeptideMolecularMass'
-            },
-            mass: {
-                type: Number,
-                value: 0.0
+            massBuilder: fishtones.dry.MassBuilder,
+            _getPeptideMolecularMass: function(){
+                if (this.peptide.length>0){
+                    this.mass = this.massBuilder.computeMassRichSequence(
+                        new fishtones.dry.RichSequence().fromString(this.peptide));
+                    this.mass = this.mass.toFixed(this.decimals);
+                }
             }
-        },
-        modificationPattern: /\[[+-]?\d+(\.\d+)?\]/g,
-        aa: {
-            'A' : 71.037114,
-            'R' : 156.101111,
-            'N' : 114.042927,
-            'D' : 115.026943,
-            'C' : 103.009185,
-            'E' : 129.042593,
-            'Q' : 128.058578,
-            'G' : 57.021464,
-            'H' : 137.058912,
-            'I' : 113.084064,
-            'L' : 113.084064,
-            'K' : 128.094963,
-            'M' : 131.040485,
-            'F' : 147.068414,
-            'P' : 97.052764,
-            'S' : 87.032028,
-            'T' : 101.047679,
-            'U' : 150.95363,
-            'W' : 186.079313,
-            'Y' : 163.06333,
-            'V' : 99.068414,
-            'X' : 0.000000
-        },
-        H2O: 18.010565,
-        _getPeptideMolecularMass: function(){
-            this.mass = 0.0;
-            if(!isNaN(parseFloat(this.peptide)) && isFinite(this.peptide)){
-                this.mass = parseFloat(this.peptide)
-            }
-            var aaSequence = this.peptide;
-            var modifications = this.peptide.match(this.modificationPattern);
-            for(var mod in modifications){
-                this.mass += new Number(modifications[mod].replace("[","").replace("]",""));
-                aaSequence = aaSequence.replace(modifications[mod], "");
-            }
-            for(var residue in aaSequence){
-                this.mass+=this.aa[aaSequence[residue].toUpperCase()];
-            }
-            if(this.mass!=0.0) { this.mass+=this.H2O };
-            this.mass = this.mass.toFixed(this.decimals);
-        }
-    });
+        });
     </script>
 </dom-module>
