@@ -25,6 +25,17 @@
                     value: 0.0
                 }
             },
+            ready: function(){
+                var dico = fishtones.dry.AminoAcidDictionary;
+                dico.add({
+                    code1: 'U',
+                    mass : 150.953636
+                });
+                dico.add({
+                    code1: 'O',
+                    mass : 237.147727
+                });
+            },
             massBuilder: fishtones.dry.MassBuilder,
             _getPeptideMolecularMass: function(){
                 if (this.peptide.length>0){
