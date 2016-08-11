@@ -39,8 +39,9 @@
             massBuilder: fishtones.dry.MassBuilder,
             _getPeptideMolecularMass: function(){
                 if (this.peptide.length>0){
+                    richSeqShortcuter = new fishtones.dry.RichSequenceShortcuter();
                     this.mass = this.massBuilder.computeMassRichSequence(
-                        new fishtones.dry.RichSequence().fromString(this.peptide));
+                        richSeqShortcuter.richSeqFromString(this.peptide));
                     this.mass = this.mass.toFixed(this.decimals);
                 }
             }
